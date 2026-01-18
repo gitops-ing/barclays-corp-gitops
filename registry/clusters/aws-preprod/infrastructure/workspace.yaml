@@ -1,0 +1,23 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: aws-preprod-infrastructure
+spec:
+  providerConfigRef: 
+    name: aws-preprod
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops.git//terraform/aws/modules/workload-cluster?ref=main
+    vars:
+    - key: cluster_name
+      value: "aws-preprod"
+    - key: cluster_region
+      value: "us-west-2"
+    - key: node_count
+      value: "2"
+    - key: node_type
+      value: "m5.large"
+    - key: ami_type
+      value: "AL2_x86_64"
+
+
