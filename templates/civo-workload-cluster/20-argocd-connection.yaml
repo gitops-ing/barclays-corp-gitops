@@ -30,7 +30,7 @@ spec:
           }
   secretStoreRef:
     kind: ClusterSecretStore
-    name: mulit-mgmt-aws-ssm
+    name: mgmt-barclays-corp-aws-ssm
   refreshInterval: 10s
   data:
     - remoteRef:
