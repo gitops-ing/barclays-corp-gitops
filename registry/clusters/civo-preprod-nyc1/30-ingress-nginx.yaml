@@ -11,12 +11,10 @@ spec:
   project: civo-preprod-nyc1-platform
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.10.0
+    targetRevision: 4.12.1
     helm:
       values: |-
         controller:
-          podAnnotations:
-            linkerd.io/inject: enabled
           ingressClass: nginx
           publishService:
             enabled: true
