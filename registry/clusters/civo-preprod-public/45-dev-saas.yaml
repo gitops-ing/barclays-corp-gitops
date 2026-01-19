@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: civo-preprod-public-dev-saas
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '45'
+spec:
+  project: civo-preprod-public-environment
+  source:
+    repoURL: https://github.com/barclays-corp/barclays-corp-gitops.git
+    path: registry/environments/dev-saas/civo-preprod-public
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: civo-preprod-public-environment
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

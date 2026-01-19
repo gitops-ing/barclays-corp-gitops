@@ -1,0 +1,23 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: civo-preprod-public-infrastructure
+spec:
+  providerConfigRef: 
+    name: civo-preprod-public
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/civo/modules/workload-cluster?ref=main
+    vars:
+    - key: cluster_name
+      value: "civo-preprod-public"
+    - key: cluster_region
+      value: "nyc1"
+    - key: node_count
+      value: "1"
+    - key: node_type
+      value: "g4s.kube.small"
+    - key: ami_type
+      value: ""
+
+

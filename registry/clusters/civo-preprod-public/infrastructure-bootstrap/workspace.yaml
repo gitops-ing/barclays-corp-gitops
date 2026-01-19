@@ -1,0 +1,13 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: civo-preprod-public-bootstrap
+spec:
+  providerConfigRef: 
+    name: civo-preprod-public
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops.git//terraform/aws/modules/bootstrap?ref=main
+    vars:
+    - key: cluster_name
+      value: "civo-preprod-public"
