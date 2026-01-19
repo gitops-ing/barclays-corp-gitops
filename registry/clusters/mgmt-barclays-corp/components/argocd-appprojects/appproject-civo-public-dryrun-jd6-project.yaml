@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: civo-public-dryrun-jd6
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: civo-public-dryrun-jd6 description
+  sourceNamespaces: ["civo-public-dryrun-jd6-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: civo-public-dryrun-jd6
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: civo-public-dryrun-jd6-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:civo-public-dryrun-jd6:admin-role, applications, *, civo-public-dryrun-jd6/*, allow
