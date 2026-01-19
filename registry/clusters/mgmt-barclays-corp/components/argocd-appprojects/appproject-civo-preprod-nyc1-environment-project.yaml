@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: civo-preprod-nyc1-environment
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: civo-preprod-nyc1 description
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: in-cluster
+    namespace: civo-preprod-nyc1-environment
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: civo-preprod-nyc1-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:civo-preprod-nyc1:admin-role, applications, *, civo-preprod-nyc1/*, allow
