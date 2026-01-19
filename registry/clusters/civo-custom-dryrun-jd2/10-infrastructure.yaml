@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: civo-custom-dryrun-jd2-infrastructure
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '10'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/gitops-ing/multi-gitops
+    path: registry/clusters/civo-custom-dryrun-jd2/infrastructure
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: civo-custom-dryrun-jd2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

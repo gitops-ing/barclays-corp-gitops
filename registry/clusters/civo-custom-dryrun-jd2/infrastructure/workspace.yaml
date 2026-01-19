@@ -1,0 +1,23 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: civo-custom-dryrun-jd2-infrastructure
+spec:
+  providerConfigRef: 
+    name: civo-custom-dryrun-jd2
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/civo?ref=main
+    vars:
+    - key: cluster_name
+      value: civo-custom-dryrun-jd2
+    - key: cluster_region
+      value: nyc1
+    - key: environment
+      value: civo-custom-dryrun-jd2
+    - key: node_count
+      value: "2"
+    - key: node_type
+      value: g4s.kube.large
+    - key: is_gpu
+      value: "false"
