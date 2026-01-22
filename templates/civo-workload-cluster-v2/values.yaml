@@ -1,10 +1,25 @@
 # Workload Cluster Configuration
-workloadClusterName: civo-cluster-example
+clusterName: civo-cluster-example
+
+# @input.type: string
+# @input.description: the Civo region where the workload cluster will be deployed (e.g., LON1, NYC1, FRA1)
+# @input.required: true
 workloadClusterRegion: LON1
+
+# @input.type: string
+# @input.description: the name of the Civo cloud account to use for provisioning
+# @input.required: true
 cloudAccountName: civo-account
 
 # Cluster Infrastructure Settings
+# @input.type: string
+# @input.description: the number of worker nodes in the Civo Kubernetes cluster
+# @input.required: true
 workloadClusterNodeCount: "3"
+
+# @input.type: string
+# @input.description: the Civo instance type for worker nodes (e.g., g4s.kube.small, g4s.kube.medium, g4s.kube.large)
+# @input.required: true
 workloadClusterInstanceType: g4s.kube.medium
 isGpu: "false"
 

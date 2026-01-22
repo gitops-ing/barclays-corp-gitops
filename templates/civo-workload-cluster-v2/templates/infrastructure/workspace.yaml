@@ -16,8 +16,8 @@ spec:
     - key: environment
       value: {{ .Values.workloadClusterName }}
     - key: node_count
-      value: "{{ .Values.workloadNodeCount }}"
+      value: "{{ .Values.workloadClusterNodeCount }}"
     - key: node_type
-      value: {{ .Values.workloadNodeType }}
+      value: {{ .Values.workloadClusterInstanceType }}
     - key: is_gpu
       value: "{{ .Values.isGpu }}"
