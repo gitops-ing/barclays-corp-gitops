@@ -9,7 +9,11 @@ workloadNodeType: g4s.kube.medium
 isGpu: "false"
 
 # Terraform Configuration
-workloadClusterTerraformModuleUrl: "https://github.com/your-org/terraform-modules//civo-cluster"
+# @input.type: string
+# @input.description: the complete url for the terraform module
+# e.g. git::https://github.com/gitops-ing/mgmt-cluster-gitops.git//terraform/aws/modules/bootstrap?ref=template-engine
+# @input.required: false
+workloadClusterTerraformModuleUrl: git::https://github.com/gitops-ing/mgmt-cluster-gitops.git//terraform/civo/modules/workload-cluster?ref=main
 
 # GitOps Repository Configuration
 gitopsRepoUrl: "https://github.com/gitops-ing/barclays-corp-gitops"
