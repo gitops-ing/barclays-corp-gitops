@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: civo-cluster-example
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: civo-cluster-example description
+  sourceNamespaces: ["civo-cluster-example-environment"]
+  sourceRepos:
+  - "https://github.com/gitops-ing/team-gitops-repo"
+  destinations:
+  - name: civo-cluster-example
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: civo-cluster-example-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:civo-cluster-example:admin-role, applications, *, civo-cluster-example/*, allow
+---
