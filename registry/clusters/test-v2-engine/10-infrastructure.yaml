@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: civo-cluster-example-infrastructure
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '10'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/gitops-ing/barclays-corp-gitops
+    path: registry/clusters/civo-cluster-example/infrastructure
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: civo-cluster-example
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---

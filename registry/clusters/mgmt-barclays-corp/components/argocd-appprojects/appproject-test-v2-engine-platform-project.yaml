@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: civo-cluster-example-platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: civo-cluster-example description
+  sourceRepos:
+  - "https://github.com/gitops-ing/barclays-corp-gitops"
+  - 'https://kubernetes.github.io/ingress-nginx'
+  - 'https://kubernetes-sigs.github.io/external-dns'
+  - 'https://charts.jetstack.io'
+  - 'https://charts.external-secrets.io'
+  - 'https://helm.datadoghq.com'
+  - 'https://stakater.github.io/stakater-charts'
+  - 'https://chartmuseum.feedkray.one'
+  - 'https://charts.loft.sh'
+  - 'https://github.com/cloudflare/origin-ca-issuer'
+  - 'https://cloudflare.github.io/origin-ca-issuer/charts'
+  - '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  destinations:
+  - namespace: external-dns
+    name: civo-cluster-example
+  - namespace: datadog
+    name: civo-cluster-example
+  - namespace: default
+    name: civo-cluster-example
+  - namespace: development
+    name: civo-cluster-example
+  - namespace: external-secrets-operator
+    name: civo-cluster-example
+  - namespace: reloader
+    name: civo-cluster-example
+  - namespace: cert-manager
+    name: civo-cluster-example
+  - namespace: ingress-nginx
+    name: civo-cluster-example
+  - namespace: kube-system
+    name: civo-cluster-example
+  - namespace: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+    server: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: civo-cluster-example-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:civo-cluster-example:admin-role, applications, *, civo-cluster-example/*, allow
+---
