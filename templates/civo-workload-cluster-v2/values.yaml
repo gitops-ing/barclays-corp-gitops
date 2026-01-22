@@ -4,8 +4,8 @@ workloadClusterRegion: LON1
 cloudAccountName: civo-account
 
 # Cluster Infrastructure Settings
-workloadNodeCount: "3"
-workloadNodeType: g4s.kube.medium
+workloadClusterNodeCount: "3"
+workloadClusterInstanceType: g4s.kube.medium
 isGpu: "false"
 
 # Terraform Configuration
