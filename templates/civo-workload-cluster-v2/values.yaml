@@ -1,0 +1,45 @@
+# Workload Cluster Configuration
+workloadClusterName: civo-cluster-example
+workloadClusterRegion: LON1
+cloudAccountName: civo-account
+
+# Cluster Infrastructure Settings
+workloadNodeCount: "3"
+workloadNodeType: g4s.kube.medium
+isGpu: "false"
+
+# Terraform Configuration
+workloadClusterTerraformModuleUrl: "https://github.com/your-org/terraform-modules//civo-cluster"
+
+# GitOps Repository Configuration
+gitopsRepoUrl: "https://github.com/gitops-ing/barclays-corp-gitops"
+teamGitopsRepoUrl: "https://github.com/gitops-ing/team-gitops-repo"
+
+# Environment Configuration
+workloadEnvironment: development
+envName: dev
+
+# Project/Management Cluster Configuration
+projectStateStoreBucket: k1-bu-mgmt-kubefirst-one-mgmt-cluster
+projectClusterRegion: us-west-2
+projectClusterAwsAccountId: "555935582951"
+projectClusterAssumeRole: "arn:aws:iam::555935582951:role/crossplane-mgmt-barclays-corp"
+
+# Secret Management
+clusterSecretStoreName: mgmt-barclays-corp-aws-ssm
+
+# Civo Provider Configuration
+civoProviderVersion: "1.1.0"
+
+# Platform Component Versions
+certManagerVersion: "v1.14.4"
+ingressNginxVersion: "4.12.1"
+reloaderVersion: "v1.0.10"
+
+# Wait Job Configuration
+waitJobImage: "dtzar/helm-kubectl:3.19.0"
+
+# Feature Flags (optional)
+enableCertManager: true
+enableIngressNginx: true
+enableReloader: true
