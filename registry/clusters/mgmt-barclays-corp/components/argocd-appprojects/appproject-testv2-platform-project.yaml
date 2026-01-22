@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: testv2-platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: testv2 description
+  sourceRepos:
+  - "https://github.com/gitops-ing/barclays-corp-gitops"
+  - 'https://kubernetes.github.io/ingress-nginx'
+  - 'https://kubernetes-sigs.github.io/external-dns'
+  - 'https://charts.jetstack.io'
+  - 'https://charts.external-secrets.io'
+  - 'https://helm.datadoghq.com'
+  - 'https://stakater.github.io/stakater-charts'
+  - 'https://chartmuseum.feedkray.one'
+  - 'https://charts.loft.sh'
+  - 'https://github.com/cloudflare/origin-ca-issuer'
+  - 'https://cloudflare.github.io/origin-ca-issuer/charts'
+  - '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  destinations:
+  - namespace: external-dns
+    name: testv2
+  - namespace: datadog
+    name: testv2
+  - namespace: default
+    name: testv2
+  - namespace: development
+    name: testv2
+  - namespace: external-secrets-operator
+    name: testv2
+  - namespace: reloader
+    name: testv2
+  - namespace: cert-manager
+    name: testv2
+  - namespace: ingress-nginx
+    name: testv2
+  - namespace: kube-system
+    name: testv2
+  - namespace: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+    server: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: testv2-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:testv2:admin-role, applications, *, testv2/*, allow
+---
