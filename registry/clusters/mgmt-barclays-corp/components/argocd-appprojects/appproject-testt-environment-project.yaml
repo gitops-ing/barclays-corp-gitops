@@ -1,27 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: civo-cluster-example-environment
+  name: testt-environment
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: civo-cluster-example description
+  description: testt description
   sourceRepos:
   - "https://github.com/gitops-ing/team-gitops-repo"
   destinations:
   - name: in-cluster
-    namespace: civo-cluster-example-environment
+    namespace: testt-environment
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
   roles:
-  - description: civo-cluster-example-admin-role
+  - description: testt-admin-role
     groups:
     - admins
     name: admin-role
     policies:
-    - p, proj:civo-cluster-example:admin-role, applications, *, civo-cluster-example/*, allow
+    - p, proj:testt:admin-role, applications, *, testt/*, allow
 ---

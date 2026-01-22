@@ -1,14 +1,14 @@
 apiVersion: "external-secrets.io/v1"
 kind: ExternalSecret
 metadata:
-  name: civo-cluster-example
+  name: testt
   annotations:
     argocd.argoproj.io/sync-wave: '20'
   labels:
     app.kubernetes.io/part-of: argocd
 spec:
   target:
-    name: civo-cluster-example
+    name: testt
     template:
       metadata:
         labels:
@@ -34,29 +34,29 @@ spec:
   refreshInterval: 10s
   data:
     - remoteRef:
-        key: /clusters/civo-cluster-example
+        key: /clusters/testt
         property: argocd_manager_sa_token
       secretKey: argocd_manager_sa_token
     - remoteRef:
-        key: /clusters/civo-cluster-example
+        key: /clusters/testt
         property: host
       secretKey: host
     - remoteRef:
-        key: /clusters/civo-cluster-example
+        key: /clusters/testt
         property: cluster_name
       secretKey: cluster_name
     - remoteRef:
-        key: /clusters/civo-cluster-example
+        key: /clusters/testt
         property: cluster_ca_certificate
         conversionStrategy: Default
       secretKey: cluster_ca_certificate
     - remoteRef:
-        key: /clusters/civo-cluster-example
+        key: /clusters/testt
         property: client_certificate
         conversionStrategy: Default
       secretKey: client_certificate
     - remoteRef:
-        key: /clusters/civo-cluster-example
+        key: /clusters/testt
         property: client_key
         conversionStrategy: Default
       secretKey: client_key

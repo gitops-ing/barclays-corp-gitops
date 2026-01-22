@@ -1,7 +1,7 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: civo-cluster-example
+  name: testt
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec:
@@ -9,7 +9,7 @@ spec:
       terraform {
         backend "s3" {
           bucket   = "k1-bu-mgmt-kubefirst-one-mgmt-cluster"
-          key      = "registry/clusters/civo-cluster-example/infrastructure/provider-config/terraform.tfstate"
+          key      = "registry/clusters/testt/infrastructure/provider-config/terraform.tfstate"
           region = "us-west-2"
           encrypt = true
         }
@@ -36,14 +36,14 @@ spec:
       }
       provider "civo" {
         credentials_file = "civo.json"
-        region = "LON1"
+        region = "mum1"
       }
   credentials:
   - filename: civo.json
     source: Secret
     secretRef:
       namespace: crossplane-system
-      name: civo-account-civo-creds
+      name: civo-preprod-civo-creds
       key: config.json
   - filename: .git-credentials
     source: Secret

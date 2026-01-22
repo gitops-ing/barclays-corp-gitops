@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: civo-cluster-example-infrastructure-wait
+  name: testt-infrastructure-wait
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "20"
@@ -16,7 +16,7 @@ spec:
         - /bin/sh
         - -c
         - |
-          while ! kubectl wait --for=jsonpath='{.status.conditions[0].status}'='True' workspace/civo-cluster-example-infrastructure; do echo "waiting for cluster to provision"; sleep 5; done
+          while ! kubectl wait --for=jsonpath='{.status.conditions[0].status}'='True' workspace/testt-infrastructure; do echo "waiting for cluster to provision"; sleep 5; done
       restartPolicy: Never
   backoffLimit: 1
 ---

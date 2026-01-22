@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: civo-cluster-example-reloader
+  name: testt-reloader
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: '30'
 spec:
-  project: civo-cluster-example-platform
+  project: testt-platform
   source:
     repoURL: 'https://stakater.github.io/stakater-charts'
     targetRevision: v1.0.10
@@ -15,7 +15,7 @@ spec:
       values: |-
         ignoreSecrets: false
   destination:
-    name: civo-cluster-example
+    name: testt
     namespace: reloader
   syncPolicy:
     automated:

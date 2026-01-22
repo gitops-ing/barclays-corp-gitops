@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: civo-cluster-example-infrastructure
+  name: testt-infrastructure
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,11 +11,11 @@ spec:
   project: default
   source:
     repoURL: https://github.com/gitops-ing/barclays-corp-gitops
-    path: registry/clusters/civo-cluster-example/infrastructure
+    path: registry/clusters/testt/infrastructure
     targetRevision: HEAD
   destination:
     name: in-cluster
-    namespace: civo-cluster-example
+    namespace: testt
   syncPolicy:
     automated:
       prune: true

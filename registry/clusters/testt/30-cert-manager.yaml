@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: civo-cluster-example-cert-manager
+  name: testt-cert-manager
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
     argocd.argoproj.io/sync-wave: '30'
 spec:
-  project: civo-cluster-example-platform
+  project: testt-platform
   source:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.14.4
@@ -20,7 +20,7 @@ spec:
         installCRDs: true
     chart: cert-manager
   destination:
-    name: civo-cluster-example
+    name: testt
     namespace: cert-manager
   syncPolicy:
     automated:
