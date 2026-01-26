@@ -16,6 +16,8 @@ spec:
   destinations:
   - name: aws-preprod
     namespace: '*'
+  - name: in-cluster
+    namespace: '*'
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
