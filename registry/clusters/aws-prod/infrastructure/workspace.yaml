@@ -18,6 +18,6 @@ spec:
     - key: node_type
       value: "m5.large"
     - key: ami_type
-      value: "AL2_x86_64"
+      value: "AL2023_x86_64_STANDARD"
 
 
