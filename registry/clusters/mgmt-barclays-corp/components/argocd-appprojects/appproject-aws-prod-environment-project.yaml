@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: aws-prod-environment
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: aws-prod description
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: in-cluster
+    namespace: aws-prod-environment
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: aws-prod-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:aws-prod:admin-role, applications, *, aws-prod/*, allow
