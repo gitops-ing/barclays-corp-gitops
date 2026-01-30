@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "main" {
-  bucket = "${var.cluster_name}-s3-${var.cluster_region}"
+  bucket = "${var.name}"
 
   tags = {
-    Name        = "${var.cluster_name}-s3-${var.cluster_region}"
+    Name        = "${var.name}"
     Environment = var.cluster_name
     ManagedBy   = "Terraform"
   }
