@@ -7,38 +7,38 @@ metadata:
 spec:
   configuration: |
     terraform {
-  backend &#34;s3&#34; {
-    bucket   = &#34;k1-bu-mgmt-mgmt-barclays-corp&#34;
-    key      = &#34;registry/clusters/s3/infrastructure/provider-config/terraform.tfstate&#34;
-    region = &#34;us-west-2&#34;
+  backend "s3" {
+    bucket   = "k1-bu-mgmt-mgmt-barclays-corp"
+    key      = "registry/clusters/s3/infrastructure/provider-config/terraform.tfstate"
+    region = "us-west-2"
     encrypt = true
   }
   required_providers {
     kubernetes = {
-      source = &#34;hashicorp/kubernetes&#34;
-      version = &#34;&gt;= 2.23.0, &lt; 3.0.0&#34;
+      source = "hashicorp/kubernetes"
+      version = ">= 2.23.0, < 3.0.0"
     }
     vault = {
-      source = &#34;hashicorp/vault&#34;
-      version = &#34;&gt;= 3.19.0, &lt; 4.0.0&#34;
+      source = "hashicorp/vault"
+      version = ">= 3.19.0, < 4.0.0"
     }
     random = {
-      source = &#34;hashicorp/random&#34;
-      version = &#34;&gt;= 3.6.2, &lt; 4.0.0&#34;
+      source = "hashicorp/random"
+      version = ">= 3.6.2, < 4.0.0"
     }
     aws = {
-      source = &#34;hashicorp/aws&#34;
-      version = &#34;&gt;= 5.30.0, &lt; 6.0.0&#34;
+      source = "hashicorp/aws"
+      version = ">= 5.30.0, < 6.0.0"
     }
   }
 }
-provider &#34;aws&#34; {
-  region = &#34;us-west-2&#34;
-  allowed_account_ids = [&#34;555935582951&#34;]
+provider "aws" {
+  region = "us-west-2"
+  allowed_account_ids = ["555935582951"]
   assume_role_with_web_identity {
-    session_name = &#34;kubefirst-pro&#34;
-    role_arn = &#34;arn:aws:iam::555935582951:role/crossplane-mgmt-barclays-corp&#34;
-    web_identity_token_file = &#34;/var/run/secrets/eks.amazonaws.com/serviceaccount/token&#34;
+    session_name = "kubefirst-pro"
+    role_arn = "arn:aws:iam::555935582951:role/crossplane-mgmt-barclays-corp"
+    web_identity_token_file = "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
   }
 }
 
@@ -64,5 +64,5 @@ spec:
     enableTerraformCLILogging: true
     vars:
     
-      - key: &lt;NAME&gt;
+      - key: <name>
         value: "s3-for-rishi-2"
