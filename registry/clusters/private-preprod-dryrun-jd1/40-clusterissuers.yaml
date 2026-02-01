@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: private-preprod-dryrun-jd1-cert-issuers
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '40'
+spec:
+  project: private-preprod-dryrun-jd1-platform
+  source:
+    repoURL: https://github.com/gitops-ing/barclays-corp-gitops
+    path: registry/clusters/private-preprod-dryrun-jd1/cert-issuers
+    targetRevision: HEAD
+  destination:
+    name: private-preprod-dryrun-jd1
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

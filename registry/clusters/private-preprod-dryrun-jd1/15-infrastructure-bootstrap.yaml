@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: private-preprod-dryrun-jd1-bootstrap
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '15'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/gitops-ing/barclays-corp-gitops
+    path: registry/clusters/private-preprod-dryrun-jd1/infrastructure-bootstrap
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: private-preprod-dryrun-jd1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 30
+      backoff:
+        duration: 1m
+        factor: 1

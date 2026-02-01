@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: private-preprod-dryrun-jd1
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: private-preprod-dryrun-jd1 description
+  sourceNamespaces: ["private-preprod-dryrun-jd1-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: private-preprod-dryrun-jd1
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: private-preprod-dryrun-jd1-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:private-preprod-dryrun-jd1:admin-role, applications, *, private-preprod-dryrun-jd1/*, allow
