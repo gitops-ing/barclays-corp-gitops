@@ -1,23 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: aws-preprod
-  namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  - resources-finalizer.argocd.argoproj.io
+  name: aws-preprod
+  namespace: argocd
 spec:
-  description: aws-preprod description
-  sourceNamespaces: ["aws-preprod-environment"]
-  sourceRepos:
-  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
-  destinations:
-  - name: aws-preprod
-    namespace: '*'
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
+  description: aws-preprod description
+  destinations:
+  - name: aws-preprod
+    namespace: '*'
   roles:
   - description: aws-preprod-admin-role
     groups:
@@ -25,3 +22,8 @@ spec:
     name: admin-role
     policies:
     - p, proj:aws-preprod:admin-role, applications, *, aws-preprod/*, allow
+  sourceNamespaces:
+  - aws-preprod-environment
+  sourceRepos:
+  - https://helm.datadoghq.com
+  - https://github.com/barclays-corp/barclays-corp-gitops.git

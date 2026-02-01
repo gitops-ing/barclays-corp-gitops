@@ -1,0 +1,72 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: datadog-frontend-team-aws-preprod-provider-config
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  configuration: |
+    terraform {
+      backend "s3" {
+        bucket   = "k1-bu-mgmt-mgmt-barclays-corp"
+        key      = "registry/clusters/datadog-frontend-team-s3/infrastructure/provider-config/terraform.tfstate"
+        region = "us-west-2"
+        encrypt = true
+      }
+      required_providers {
+        kubernetes = {
+          source = "hashicorp/kubernetes"
+          version = ">= 2.23.0, < 3.0.0"
+        }
+        vault = {
+          source = "hashicorp/vault"
+          version = ">= 3.19.0, < 4.0.0"
+        }
+        random = {
+          source = "hashicorp/random"
+          version = ">= 3.6.2, < 4.0.0"
+        }
+        aws = {
+          source = "hashicorp/aws"
+          version = ">= 5.30.0, < 6.0.0"
+        }
+      }
+    }
+    provider "aws" {
+      region = "us-west-2"
+      allowed_account_ids = ["555935582951"]
+      assume_role_with_web_identity {
+        session_name = "kubefirst-pro"
+        role_arn = "arn:aws:iam::555935582951:role/crossplane-mgmt-barclays-corp"
+        web_identity_token_file = "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
+      }
+    }
+
+  pluginCache: false
+  credentials:
+  - filename: .git-credentials
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: git-credentials
+      key: creds
+---
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: datadog-frontend-team-aws-preprod
+spec:
+  providerConfigRef: 
+    name: datadog-frontend-team-aws-preprod-provider-config
+  forProvider:
+    source: Remote
+    module: 
+    enableTerraformCLILogging: true
+    vars:
+    
+      - key: bucket_region
+        value: "us-west-2"
+      - key: name
+        value: "datadog-frontend-team-s3"
+      - key: s3_name
+        value: "datadog-frontend-team-s3"
