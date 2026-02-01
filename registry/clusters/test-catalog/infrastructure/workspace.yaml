@@ -7,7 +7,7 @@ spec:
     name: test-catalog
   forProvider:
     source: Remote
-    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/civo/modules /workload-cluster?ref=main
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/civo/modules/workload-cluster?ref=main
     vars:
     - key: cluster_name
       value: "test-catalog"
