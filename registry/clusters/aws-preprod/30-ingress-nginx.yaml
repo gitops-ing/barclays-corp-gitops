@@ -15,9 +15,6 @@ spec:
     helm:
       values: |-
         controller:
-          admissionWebhooks:
-            annotations:
-              argocd.argoproj.io/hook: Skip
           ingressClass: nginx
           publishService:
             enabled: true
