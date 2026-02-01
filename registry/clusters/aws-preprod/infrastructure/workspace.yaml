@@ -14,9 +14,9 @@ spec:
     - key: cluster_region
       value: "us-west-2"
     - key: node_count
-      value: "2"
+      value: "4"
     - key: node_type
-      value: "m5.large"
+      value: "m5.xlarge"
     - key: ami_type
       value: "AL2_x86_64"
 

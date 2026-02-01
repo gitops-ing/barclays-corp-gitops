@@ -12,12 +12,8 @@ spec:
   sourceNamespaces: ["aws-preprod-environment"]
   sourceRepos:
   - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
-  - 'oci://555935582951.dkr.ecr.us-west-2.amazonaws.com/barclays-corp/charts/zippy'
-  - 'https://charts.bitnami.com/bitnami'
   destinations:
   - name: aws-preprod
-    namespace: '*'
-  - name: in-cluster
     namespace: '*'
   clusterResourceWhitelist:
   - group: '*'

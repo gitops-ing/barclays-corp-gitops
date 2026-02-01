@@ -11,7 +11,6 @@ spec:
   description: aws-preprod description
   sourceRepos:
   - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
-  - 'oci://555935582951.dkr.ecr.us-west-2.amazonaws.com/barclays-corp/charts/zippy'
   destinations:
   - name: in-cluster
     namespace: aws-preprod-environment
