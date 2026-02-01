@@ -60,7 +60,7 @@ spec:
     name: s3-for-rishi-2-civo-preprod-nyc1-provider-config
   forProvider:
     source: Remote
-    module: 
+    module: https://github.com/gitops-ing/barclays-corp-gitops/terraform/s3
     enableTerraformCLILogging: true
     vars:
     
