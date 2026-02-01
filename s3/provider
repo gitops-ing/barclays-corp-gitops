@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket   = "k1-bu-mgmt-mgmt-barclays-corp"
-    key      = "registry/clusters/s3/infrastructure/provider-config/terraform.tfstate"
+    key      = "registry/clusters/<S3_NAME>/infrastructure/provider-config/terraform.tfstate"
     region = "us-west-2"
     encrypt = true
   }
