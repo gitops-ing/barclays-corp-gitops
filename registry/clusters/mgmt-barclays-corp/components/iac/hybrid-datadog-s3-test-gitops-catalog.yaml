@@ -60,7 +60,7 @@ spec:
     name: hybrid-datadog-s3-test-gitops-catalog-provider-config
   forProvider:
     source: Remote
-    module: https://github.com/gitops-ing/barclays-corp-gitops/terraform/datadog-with-s3
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops.git//terraform/s3?ref=main
     enableTerraformCLILogging: true
     vars:
     
