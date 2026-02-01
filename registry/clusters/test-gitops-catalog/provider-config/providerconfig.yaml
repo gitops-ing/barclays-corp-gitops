@@ -30,7 +30,7 @@ spec:
         allowed_account_ids = ["555935582951"]
         assume_role_with_web_identity {
           session_name = "kubefirst-pro"
-          role_arn = "arn:aws:iam::555935582951:role/crossplane-mulit-mgmt"
+          role_arn = "arn:aws:iam::555935582951:role/crossplane-mgmt-barclays-corp"
           web_identity_token_file = "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
         }
       }

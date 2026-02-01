@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/gitops-ing/multi-gitops
+    repoURL: https://github.com/gitops-ing/barclays-corp-gitops
     path: registry/clusters/test-gitops-catalog/provider-config
     targetRevision: HEAD
   destination:

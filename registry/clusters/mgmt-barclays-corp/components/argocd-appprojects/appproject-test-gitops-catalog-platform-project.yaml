@@ -10,7 +10,7 @@ metadata:
 spec:
   description: test-gitops-catalog description
   sourceRepos:
-  - 'https://github.com/gitops-ing/multi-gitops'
+  - 'https://github.com/gitops-ing/barclays-corp-gitops'
   - 'https://kubernetes.github.io/ingress-nginx'
   - 'https://kubernetes-sigs.github.io/external-dns'
   - 'https://charts.jetstack.io'
