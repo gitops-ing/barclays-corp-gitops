@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: test-gitops-catalog
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: test-gitops-catalog description
+  sourceNamespaces: ["test-gitops-catalog-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: test-gitops-catalog
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: test-gitops-catalog-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:test-gitops-catalog:admin-role, applications, *, test-gitops-catalog/*, allow
