@@ -3,6 +3,7 @@ controlPlane:
     k3s:
       enabled: true
       extraArgs:
+        - "--service-cidr=172.20.0.0/16"
         - "--tls-san=${vcluster_name}.${domain_name}"
         - "--kube-apiserver-arg=oidc-issuer-url=https://dex.gitops.ing"
         - "--kube-apiserver-arg=oidc-client-id=kubernetes"
