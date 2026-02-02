@@ -12,6 +12,7 @@ spec:
   sourceNamespaces: ["test-gitops-catalog-environment"]
   sourceRepos:
   - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  - '*'
   destinations:
   - name: test-gitops-catalog
     namespace: '*'
