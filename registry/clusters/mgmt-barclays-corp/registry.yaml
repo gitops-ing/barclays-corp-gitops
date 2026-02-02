@@ -14,7 +14,7 @@ spec:
     path: registry/clusters/mgmt-barclays-corp
     targetRevision: HEAD
   destination:
-    server: https://kubernetes.default.svc
+    name: in-cluster
     namespace: argocd
   syncPolicy:
     automated:
