@@ -1,0 +1,17 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: kon-s3-jd1-bcorp-engineering
+spec:
+  providerConfigRef: 
+    name: kon-s3-jd1-bcorp-engineering-provider-config
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/s3?ref=main
+    enableTerraformCLILogging: true
+    vars:
+    
+      - key: bucket_region
+        value: "us-west-2-unused"
+      - key: name
+        value: "kon-s3-jd1-bcorp"
