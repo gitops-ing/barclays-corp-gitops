@@ -7,7 +7,7 @@ spec:
     name: civo-private-run-jd3
   forProvider:
     source: Remote
-    module: git::https://github.com/gitops-ing/barclays-corp-gitops.git//terraform/aws/modules/workload-cluster?ref=main
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/civo/modules/workload-cluster?ref=main
     vars:
     - key: cluster_name
       value: civo-private-run-jd3
