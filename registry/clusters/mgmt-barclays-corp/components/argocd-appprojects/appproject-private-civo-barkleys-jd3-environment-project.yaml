@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: private-civo-barkleys-jd3-environment
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: private-civo-barkleys-jd3 description
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: in-cluster
+    namespace: private-civo-barkleys-jd3-environment
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: private-civo-barkleys-jd3-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:private-civo-barkleys-jd3:admin-role, applications, *, private-civo-barkleys-jd3/*, allow
