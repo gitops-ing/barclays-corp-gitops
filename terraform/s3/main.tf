@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "main" {
 
   tags = {
     Name        = "${var.name}"
-    Environment = var.cluster_name
+    Environment = var.name
     ManagedBy   = "Terraform"
   }
 }
