@@ -12,6 +12,7 @@ spec:
   sourceNamespaces: ["civo-public-lon1-environment"]
   sourceRepos:
   - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  - 'https://charts.gitlab.io'
   destinations:
   - name: civo-public-lon1
     namespace: '*'
