@@ -1,0 +1,23 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: civo-barclays-priv-region-test-infrastructure
+spec:
+  providerConfigRef: 
+    name: civo-barclays-priv-region-test
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops.git//terraform/aws/modules/workload-cluster?ref=main
+    vars:
+    - key: cluster_name
+      value: "civo-barclays-priv-region-test"
+    - key: cluster_region
+      value: "barclays-lon1"
+    - key: node_count
+      value: "1"
+    - key: node_type
+      value: "g4s.kube.small"
+    - key: ami_type
+      value: ""
+
+

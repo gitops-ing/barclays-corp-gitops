@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: civo-barclays-priv-region-test
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: civo-barclays-priv-region-test description
+  sourceNamespaces: ["civo-barclays-priv-region-test-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: civo-barclays-priv-region-test
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: civo-barclays-priv-region-test-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:civo-barclays-priv-region-test:admin-role, applications, *, civo-barclays-priv-region-test/*, allow
