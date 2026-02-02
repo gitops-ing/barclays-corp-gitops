@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: virtual-dev-cluster-1-platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: virtual-dev-cluster-1 description
+  sourceRepos:
+  - 'https://github.com/gitops-ing/barclays-corp-gitops'
+  - 'https://kubernetes.github.io/ingress-nginx'
+  - 'https://kubernetes-sigs.github.io/external-dns'
+  - 'https://charts.jetstack.io'
+  - 'https://charts.external-secrets.io'
+  - 'https://helm.datadoghq.com'
+  - 'https://stakater.github.io/stakater-charts'
+  - 'https://chartmuseum.feedkray.one'
+  - 'https://charts.loft.sh'
+  - 'https://github.com/cloudflare/origin-ca-issuer'
+  - 'https://cloudflare.github.io/origin-ca-issuer/charts'
+  - '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  destinations:
+  - namespace: external-dns
+    name: virtual-dev-cluster-1
+  - namespace: datadog
+    name: virtual-dev-cluster-1
+  - namespace: default
+    name: virtual-dev-cluster-1
+  - namespace: <WORKLOAD_ENVIRONMENT>
+    name: virtual-dev-cluster-1
+  - namespace: external-secrets-operator
+    name: virtual-dev-cluster-1
+  - namespace: reloader
+    name: virtual-dev-cluster-1
+  - namespace: cert-manager
+    name: virtual-dev-cluster-1
+  - namespace: ingress-nginx
+    name: virtual-dev-cluster-1
+  - namespace: kube-system
+    name: virtual-dev-cluster-1
+  - namespace: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+    server: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: virtual-dev-cluster-1-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:virtual-dev-cluster-1:admin-role, applications, *, virtual-dev-cluster-1/*, allow
