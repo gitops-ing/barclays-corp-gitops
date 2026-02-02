@@ -1,0 +1,19 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: s3-for-frontend
+spec:
+  providerConfigRef: 
+    name: s3-for-frontend-provider-config
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/s3?ref=main
+    enableTerraformCLILogging: true
+    vars:
+    
+      - key: bucket_region
+        value: "us-east-1"
+      - key: name
+        value: "pikachu"
+      - key: s3_name
+        value: "pikachu"
