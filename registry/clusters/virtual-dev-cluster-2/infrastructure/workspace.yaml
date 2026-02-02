@@ -1,0 +1,17 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: virtual-dev-cluster-2-infrastructure
+spec:
+  providerConfigRef:
+    name: virtual-dev-cluster-2
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops.git//terraform/aws/modules/workload-vcluster?ref=main
+    vars:
+    - key: vcluster_name
+      value: "virtual-dev-cluster-2"
+    - key: host_cluster
+      value: "sandbox-host"
+    - key: domain_name
+      value: "gitops.ing"

@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: virtual-dev-cluster-2
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: virtual-dev-cluster-2 description
+  sourceNamespaces: ["virtual-dev-cluster-2-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: virtual-dev-cluster-2
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: virtual-dev-cluster-2-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:virtual-dev-cluster-2:admin-role, applications, *, virtual-dev-cluster-2/*, allow
