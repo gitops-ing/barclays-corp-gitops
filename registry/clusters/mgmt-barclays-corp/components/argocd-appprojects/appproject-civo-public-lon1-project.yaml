@@ -13,6 +13,7 @@ spec:
   sourceRepos:
   - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
   - 'https://charts.gitlab.io'
+  - 'https://kubernetes.github.io/autoscaler'
   destinations:
   - name: civo-public-lon1
     namespace: '*'
