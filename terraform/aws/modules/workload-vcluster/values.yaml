@@ -1,15 +1,13 @@
-controlPlane: 
-  distro: 
+controlPlane:
+  distro:
     k3s:
       enabled: true
       extraArgs:
-        - "--service-cidr=172.20.0.0/16"
         - "--tls-san=${vcluster_name}.${domain_name}"
         - "--kube-apiserver-arg=oidc-issuer-url=https://dex.gitops.ing"
         - "--kube-apiserver-arg=oidc-client-id=kubernetes"
         - "--kube-apiserver-arg=oidc-username-claim=email"
         - "--kube-apiserver-arg=oidc-groups-claim=groups"
-
   ingress:
     enabled: true
     pathType: ImplementationSpecific
@@ -25,6 +23,9 @@ controlPlane:
         - secretName: "${vcluster_name}-tls"
           hosts:
             - "${vcluster_name}.${domain_name}"
+
+networking:
+  serviceCIDR: "172.20.0.0/16"
 
 sync:
   toHost:
