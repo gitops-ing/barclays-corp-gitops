@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: civo-private-preprod-2
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: civo-private-preprod-2 description
+  sourceNamespaces: ["civo-private-preprod-2-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: civo-private-preprod-2
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: civo-private-preprod-2-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:civo-private-preprod-2:admin-role, applications, *, civo-private-preprod-2/*, allow
