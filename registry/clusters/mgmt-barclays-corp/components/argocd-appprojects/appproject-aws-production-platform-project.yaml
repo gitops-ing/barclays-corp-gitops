@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: aws-production-platform
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: aws-production description
+  sourceRepos:
+  - 'https://github.com/gitops-ing/barclays-corp-gitops'
+  - 'https://kubernetes.github.io/ingress-nginx'
+  - 'https://kubernetes-sigs.github.io/external-dns'
+  - 'https://charts.jetstack.io'
+  - 'https://charts.external-secrets.io'
+  - 'https://helm.datadoghq.com'
+  - 'https://stakater.github.io/stakater-charts'
+  - 'https://chartmuseum.feedkray.one'
+  - 'https://charts.loft.sh'
+  - 'https://github.com/cloudflare/origin-ca-issuer'
+  - 'https://cloudflare.github.io/origin-ca-issuer/charts'
+  - '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  destinations:
+  - namespace: external-dns
+    name: aws-production
+  - namespace: datadog
+    name: aws-production
+  - namespace: default
+    name: aws-production
+  - namespace: <WORKLOAD_ENVIRONMENT>
+    name: aws-production
+  - namespace: external-secrets-operator
+    name: aws-production
+  - namespace: reloader
+    name: aws-production
+  - namespace: cert-manager
+    name: aws-production
+  - namespace: ingress-nginx
+    name: aws-production
+  - namespace: kube-system
+    name: aws-production
+  - namespace: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+    server: '*' # Adding wildcard for the gitops catalog. This wildcard can be removed from the template or after provisioning
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: aws-production-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:aws-production:admin-role, applications, *, aws-production/*, allow
