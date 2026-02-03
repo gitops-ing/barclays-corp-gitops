@@ -1,0 +1,17 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: feef
+spec:
+  providerConfigRef: 
+    name: feef-provider-config
+  forProvider:
+    source: Remote
+    module: git::https://github.com/gitops-ing/barclays-corp-gitops//terraform/s3?ref=main
+    enableTerraformCLILogging: true
+    vars:
+    
+      - key: bucket_region
+        value: "ef"
+      - key: name
+        value: "ef"
