@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: test-gitlab
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: test-gitlab description
+  sourceNamespaces: ["test-gitlab-environment"]
+  sourceRepos:
+  - 'https://github.com/barclays-corp/barclays-corp-gitops.git'
+  destinations:
+  - name: test-gitlab
+    namespace: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - description: test-gitlab-admin-role
+    groups:
+    - admins
+    name: admin-role
+    policies:
+    - p, proj:test-gitlab:admin-role, applications, *, test-gitlab/*, allow
